@@ -4,11 +4,10 @@
 #include <iomanip>
 #include <fstream>
 #include "product.h"
+#include "addproduct.h"
 
 void showProducts(const std::vector<Product>& products) {
-
-	std::string lowQuantity = "";
-
+    std::string lowQuantity = "";
     for (size_t i = 0; i < products.size(); i++) {
 		if(products[i].quantity != 0 && products[i].quantity < 5) lowQuantity = " MAZAI";
         std::cout << i + 1 << ". "
@@ -67,6 +66,7 @@ int main() {
         std::cout << "\n=== Parduotuve ===\n";
         std::cout << "1. Show products\n";
         std::cout << "2. Show most expensive product\n";
+        std::cout << "3. Add product\n";
         std::cout << "0. Exit\n";
         std::cout << "Choice: ";
         std::cin >> choice;
@@ -77,6 +77,9 @@ int main() {
             break;
         case 1:
             showProducts(products);
+            break;
+        case 3:
+            AddProduct(products);
             break;
         case 0:
             std::cout << "Bye!\n";

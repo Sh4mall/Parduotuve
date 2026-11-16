@@ -1,14 +1,20 @@
 ﻿#include <iostream>
 #include <vector>
+#include <string>
 #include <iomanip>
 #include "product.h"
 
 void showProducts(const std::vector<Product>& products) {
+
+	std::string lowQuantity = "";
+
     for (size_t i = 0; i < products.size(); i++) {
+		if(products[i].quantity != 0 && products[i].quantity < 5) lowQuantity = " MAZAI";
         std::cout << i + 1 << ". "
-            << std::left << std::setw(10) << ((products[i].quantity == 0 ? "ISPARDUOTA" : products[i].name)) << ((products[i].quantity != 0 && products[i].quantity) ? " MAZAI" : "")
-            << std::fixed << std::setprecision(2) << products[i].price << " EUR";
-            << "   quantity: " << products[i].quantity << "\n";
+            << std::left << std::setw(10) << products[i].name 
+            << std::fixed << std::setprecision(2) << products[i].price << " EUR"
+            << "   quantity: " << (products[i].quantity == 0 ? "IŠPARDUOTA" : std::to_string(products[i].quantity)) << lowQuantity << "\n";
+		lowQuantity = "";
     }
 }
 

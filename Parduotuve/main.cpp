@@ -5,6 +5,7 @@
 #include <fstream>
 #include "product.h"
 #include "addproduct.h"
+#include "sortByQuantity.h"
 
 void showProducts(const std::vector<Product>& products) {
     std::string lowQuantity = "";

@@ -2,7 +2,8 @@
 #include <vector>
 #include <string>
 #include <iomanip>
-#include "product.h"
+#include <fstream>
+#include "Product.h"
 
 void showProducts(const std::vector<Product>& products) {
 
@@ -18,22 +19,62 @@ void showProducts(const std::vector<Product>& products) {
     }
 }
 
+void showMostExpensiveProduct(const std::vector<Product>& products) {
+    if (products.empty()) {
+        std::cout << "Prekiu nera\n";
+        return;
+    }
+
+    Product mostExpensive = products[0];
+    for (size_t i = 1; i < products.size(); i++) {
+        if (products[i].price > mostExpensive.price) {
+            mostExpensive = products[i];
+        }
+    }
+
+    std::cout << "Brangiausia preke: " << mostExpensive.name
+        << " (" << std::fixed << std::setprecision(2) << mostExpensive.price << " EUR)\n";
+}
+
 int main() {
-    std::vector<Product> products = {
+	std::ofstream outputFile("products.txt");
+
+    std::vector<Product> products =
+    {
         { "Pienas", 1.20, 30 },
         { "Duona", 0.95, 4 },
         { "Suris", 4.50, 0 }
     };
 
+    if (outputFile.is_open())
+    {
+        for (size_t i = 0; i < products.size(); i++)
+        {
+            outputFile << products[i].name << " " << products[i].price << " " << products[i].quantity << "\n";
+        }
+        outputFile << "Issaugota prekiu " << products.size() << "\n";
+        outputFile.close();
+        std::cout << "Duomenys sekmingai issaugoti i products.txt\n";
+    }
+    else
+    {
+		std::cout << "Nepavyko atidaryti failo products.txt\n";
+    }
+
     int choice = -1;
-    while (choice != 0) {
+    while (choice != 0)
+    {
         std::cout << "\n=== Parduotuve ===\n";
         std::cout << "1. Show products\n";
+        std::cout << "2. Show most expensive product\n";
         std::cout << "0. Exit\n";
         std::cout << "Choice: ";
         std::cin >> choice;
 
         switch (choice) {
+        case 2:
+            showMostExpensiveProduct(products);
+            break;
         case 1:
             showProducts(products);
             break;

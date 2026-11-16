@@ -1,16 +1,20 @@
 ﻿#include <iostream>
 #include <vector>
+#include <string>
 #include <iomanip>
 #include <fstream>
-#include "Product.h"
-
+#include "product.h"
 #include "addproduct.h"
+
 void showProducts(const std::vector<Product>& products) {
+    std::string lowQuantity = "";
     for (size_t i = 0; i < products.size(); i++) {
+		if(products[i].quantity != 0 && products[i].quantity < 5) lowQuantity = " MAZAI";
         std::cout << i + 1 << ". "
-            << std::left << std::setw(10) << products[i].name
+            << std::left << std::setw(10) << products[i].name 
             << std::fixed << std::setprecision(2) << products[i].price << " EUR"
-            << "   quantity: " << products[i].quantity << "\n";
+            << "   quantity: " << (products[i].quantity == 0 ? "IŠPARDUOTA" : std::to_string(products[i].quantity)) << lowQuantity << "\n";
+		lowQuantity = "";
     }
 }
 
@@ -37,8 +41,8 @@ int main() {
     std::vector<Product> products =
     {
         { "Pienas", 1.20, 30 },
-        { "Duona", 0.95, 15 },
-        { "Suris", 4.50, 8 }
+        { "Duona", 0.95, 4 },
+        { "Suris", 4.50, 0 }
     };
 
     if (outputFile.is_open())

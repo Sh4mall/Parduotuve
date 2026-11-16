@@ -37,6 +37,14 @@ void showMostExpensiveProduct(const std::vector<Product>& products) {
         << " (" << std::fixed << std::setprecision(2) << mostExpensive.price << " EUR)\n";
 }
 
+void AtsarguVerte(const std::vector<Product>& products) {
+    double galutineKaina = 0;
+    for (size_t i = 0; i < products.size(); i++) {
+        galutineKaina += products[i].price * products[i].quantity;
+    }
+    std::cout << std::fixed << "Dabartine atsargu verte: " << std::setprecision(2) << galutineKaina << " EUR" << std::endl;
+}
+
 int main() {
 	std::ofstream outputFile("products.txt");
 
@@ -70,6 +78,7 @@ int main() {
         std::cout << "2. Show most expensive product\n";
         std::cout << "3. Add product\n";
 		std::cout << "4. Apply discount\n";
+        std::cout << "5. Show stock value\n";
         std::cout << "0. Exit\n";
         std::cout << "Choice: ";
         std::cin >> choice;
@@ -78,6 +87,9 @@ int main() {
         case 4:
 			pritaikytiNuolaida(products);
 			break;
+        case 5:
+            AtsarguVerte(products);
+            break;
         case 2:
             showMostExpensiveProduct(products);
             break;

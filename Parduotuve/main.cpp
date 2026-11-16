@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <vector>
 #include <iomanip>
-#include "Product.h"
+#include "product.h"
 
 void showProducts(const std::vector<Product>& products) {
     for (size_t i = 0; i < products.size(); i++) {

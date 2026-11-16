@@ -6,8 +6,8 @@
 void showProducts(const std::vector<Product>& products) {
     for (size_t i = 0; i < products.size(); i++) {
         std::cout << i + 1 << ". "
-            << std::left << std::setw(10) << products[i].name
-            << std::fixed << std::setprecision(2) << products[i].price << " EUR"
+            << std::left << std::setw(10) << ((products[i].quantity == 0 ? "ISPARDUOTA" : products[i].name)) << ((products[i].quantity != 0 && products[i].quantity) ? " MAZAI" : "")
+            << std::fixed << std::setprecision(2) << products[i].price << " EUR";
             << "   quantity: " << products[i].quantity << "\n";
     }
 }
@@ -15,8 +15,8 @@ void showProducts(const std::vector<Product>& products) {
 int main() {
     std::vector<Product> products = {
         { "Pienas", 1.20, 30 },
-        { "Duona", 0.95, 15 },
-        { "Suris", 4.50, 8 }
+        { "Duona", 0.95, 4 },
+        { "Suris", 4.50, 0 }
     };
 
     int choice = -1;
